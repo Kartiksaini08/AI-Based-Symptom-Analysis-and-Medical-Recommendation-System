@@ -1,0 +1,36 @@
+{
+  "fever": [
+    "high_fever",
+    "mild_fever"
+  ],
+  "rash": [
+    "skin_rash"
+  ],
+  "tiredness": [
+    "fatigue"
+  ],
+  "stomach_ache": [
+    "stomach_pain"
+  ],
+  "stomachache": [
+    "stomach_pain"
+  ],
+  "belly_ache": [
+    "belly_pain"
+  ],
+  "runny_nose": [
+    "runny_nose"
+  ],
+  "sore_throat": [
+    "throat_irritation"
+  ],
+  "breathing_difficulty": [
+    "breathlessness"
+  ],
+  "shortness_of_breath": [
+    "breathlessness"
+  ],
+  "throwing_up": [
+    "vomiting"
+  ]
+}

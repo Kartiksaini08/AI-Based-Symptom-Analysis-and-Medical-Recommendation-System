@@ -1,0 +1,80 @@
+{% extends "base_info.html" %}
+
+{% set active_page = "developer" %}
+
+{% block title %}Developer | MediPredict{% endblock %}
+
+{% block content %}
+  <section class="hero-wrap mb-4">
+    <div class="hero-icon"><i class="bi bi-code-square"></i></div>
+    <p class="mini-label text-white-50 mb-2">Team and build</p>
+    <h1 class="fw-bold mb-3">Built by a team focused on AI, ML, and practical health-tech UX.</h1>
+    <p class="hero-copy mb-0">
+      This project brings together machine learning, Flask development, data-driven recommendations, and frontend design improvements to create a more polished health guidance experience.
+    </p>
+  </section>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card content-card">
+        <div class="card-body p-4 p-md-5">
+          <p class="mini-label mb-2">Developer note</p>
+          <h3 class="mb-3">The project evolved beyond a classroom demo.</h3>
+          <p class="text-muted">
+            What started as a machine learning symptom classifier has been improved into a more complete product-style application. The work now includes modular Flask architecture, a reproducible training pipeline, structured inference artifacts, validation for symptom entry, and a redesigned interface focused on clarity and safety messaging.
+          </p>
+          <p class="text-muted mb-0">
+            The build emphasizes not just whether a model can predict, but whether the output is understandable, actionable, and presented responsibly.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card soft-card h-100">
+        <div class="card-body p-4">
+          <p class="mini-label mb-2">Team</p>
+          <h5 class="mb-3">Contributors</h5>
+          <ul class="text-muted mb-0">
+            <li>Kartik</li>
+            <li>Gitesh</li>
+            <li>Aishwarya</li>
+            <li>Manish</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card soft-card">
+            <div class="card-body p-4">
+              <p class="mini-label mb-2">Backend</p>
+              <h5>Flask and modular routes</h5>
+              <p class="text-muted mb-0">The app structure now separates routing, model loading, prediction, and utility logic for easier maintenance.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card soft-card">
+            <div class="card-body p-4">
+              <p class="mini-label mb-2">Machine learning</p>
+              <h5>Rebuilt training workflow</h5>
+              <p class="text-muted mb-0">The project now includes a model comparison script, saved metrics, and a clean joblib inference bundle.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card soft-card">
+            <div class="card-body p-4">
+              <p class="mini-label mb-2">Experience</p>
+              <h5>Guided and visual</h5>
+              <p class="text-muted mb-0">Autocomplete symptom chips, inline result cards, urgency styling, and stronger UI hierarchy make the app easier to use.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

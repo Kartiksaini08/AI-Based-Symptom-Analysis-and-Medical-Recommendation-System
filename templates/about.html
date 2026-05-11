@@ -1,0 +1,92 @@
+{% extends "base_info.html" %}
+
+{% set active_page = "about" %}
+
+{% block title %}About | MediPredict{% endblock %}
+
+{% block content %}
+  <section class="hero-wrap mb-4">
+    <div class="hero-icon"><i class="bi bi-shield-plus"></i></div>
+    <p class="mini-label text-white-50 mb-2">About the platform</p>
+    <h1 class="fw-bold mb-3">Designed to make symptom-based guidance easier to understand.</h1>
+    <p class="hero-copy mb-4">
+      MediPredict combines machine learning with structured health guidance so users can move from scattered symptoms to a clearer, more actionable overview.
+    </p>
+    <div class="d-flex flex-wrap gap-2">
+      <span class="stat-pill">Educational use</span>
+      <span class="stat-pill">Guided symptom input</span>
+      <span class="stat-pill">Top-match predictions</span>
+    </div>
+  </section>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card content-card">
+        <div class="card-body p-4 p-md-5">
+          <p class="mini-label mb-2">Our mission</p>
+          <h3 class="mb-3">Health guidance that feels approachable, not overwhelming.</h3>
+          <p class="text-muted">
+            We built this project to make symptom-based health exploration more usable for everyday people. Instead of returning only a raw prediction, the app also provides context such as likely condition matches, precautions, activity guidance, dietary support, and prompts for when it is time to contact a doctor.
+          </p>
+          <p class="text-muted mb-0">
+            The goal is not to replace clinical diagnosis. The goal is to help users organize what they are experiencing, understand possible next steps, and approach care conversations more confidently.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card soft-card">
+        <div class="card-body p-4">
+          <p class="mini-label mb-2">What it includes</p>
+          <div class="d-grid gap-3">
+            <div>
+              <strong>Condition predictions</strong>
+              <p class="text-muted small mb-0">Top 3 likely matches generated from supported symptom combinations.</p>
+            </div>
+            <div>
+              <strong>Safety messaging</strong>
+              <p class="text-muted small mb-0">Care escalation guidance and emergency warning signs are surfaced with each result.</p>
+            </div>
+            <div>
+              <strong>Support guidance</strong>
+              <p class="text-muted small mb-0">Diet, medication, workout, and precaution suggestions are pulled from the project datasets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card soft-card">
+            <div class="card-body p-4">
+              <p class="mini-label mb-2">Vision</p>
+              <h5>Better health literacy</h5>
+              <p class="text-muted mb-0">Support people with understandable explanations instead of opaque technical outputs.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card soft-card">
+            <div class="card-body p-4">
+              <p class="mini-label mb-2">Approach</p>
+              <h5>Structured and guided</h5>
+              <p class="text-muted mb-0">Improve prediction quality by combining autocomplete symptom selection with a reproducible ML pipeline.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card soft-card">
+            <div class="card-body p-4">
+              <p class="mini-label mb-2">Responsibility</p>
+              <h5>Educational only</h5>
+              <p class="text-muted mb-0">This platform is built to inform, not diagnose, and should always sit behind professional medical advice.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

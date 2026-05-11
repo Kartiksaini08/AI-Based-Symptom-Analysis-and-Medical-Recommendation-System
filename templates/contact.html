@@ -1,0 +1,87 @@
+{% extends "base_info.html" %}
+
+{% set active_page = "contact" %}
+
+{% block title %}Contact | MediPredict{% endblock %}
+
+{% block content %}
+  <section class="hero-wrap mb-4">
+    <div class="hero-icon"><i class="bi bi-chat-dots"></i></div>
+    <p class="mini-label text-white-50 mb-2">Contact</p>
+    <h1 class="fw-bold mb-3">Questions, feedback, or project collaboration?</h1>
+    <p class="hero-copy mb-0">
+      Reach out for project feedback, technical discussion, collaboration opportunities, or suggestions that could improve the platform experience.
+    </p>
+  </section>
+
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card content-card">
+        <div class="card-body p-4 p-md-5">
+          <p class="mini-label mb-2">Get in touch</p>
+          <h3 class="mb-3">We’d love to hear what would make the app better.</h3>
+          <p class="text-muted">
+            Whether you want to discuss the machine learning pipeline, frontend UX, deployment ideas, or resume presentation for the project, feel free to get in touch.
+          </p>
+          <div class="row g-3 mt-1">
+            <div class="col-md-6">
+              <div class="card soft-card">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center gap-3 mb-2">
+                    <i class="bi bi-envelope fs-4 text-primary"></i>
+                    <strong>Email</strong>
+                  </div>
+                  <p class="text-muted mb-0">kartiksaini5208@gmail.com</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card soft-card">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center gap-3 mb-2">
+                    <i class="bi bi-telephone fs-4 text-primary"></i>
+                    <strong>Phone</strong>
+                  </div>
+                  <p class="text-muted mb-0">8690934457</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card soft-card">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center gap-3 mb-2">
+                    <i class="bi bi-geo-alt fs-4 text-primary"></i>
+                    <strong>Location</strong>
+                  </div>
+                  <p class="text-muted mb-0">Bangalore, India</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card soft-card h-100">
+        <div class="card-body p-4">
+          <p class="mini-label mb-2">Best reasons to connect</p>
+          <div class="d-grid gap-3">
+            <div>
+              <strong>Project review</strong>
+              <p class="text-muted small mb-0">Suggestions on the ML pipeline, UX, or technical architecture.</p>
+            </div>
+            <div>
+              <strong>Collaboration</strong>
+              <p class="text-muted small mb-0">Ideas for adding healthcare integrations, dashboards, or deployment improvements.</p>
+            </div>
+            <div>
+              <strong>Academic and portfolio discussion</strong>
+              <p class="text-muted small mb-0">Support in presenting the project well for demos, GitHub, or a resume.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

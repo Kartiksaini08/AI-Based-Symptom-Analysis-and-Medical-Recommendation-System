@@ -1,0 +1,97 @@
+{% extends "base_info.html" %}
+
+{% set active_page = "blog" %}
+
+{% block title %}Blog | MediPredict{% endblock %}
+
+{% block content %}
+  <section class="hero-wrap mb-4">
+    <div class="hero-icon"><i class="bi bi-journal-richtext"></i></div>
+    <p class="mini-label text-white-50 mb-2">Build story</p>
+    <h1 class="fw-bold mb-3">From a simple predictor to a guided health UX project.</h1>
+    <p class="hero-copy mb-0">
+      This project started as a symptom-based disease classifier and evolved into a more complete experience with guided symptom input, top-match predictions, and practical care guidance.
+    </p>
+  </section>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card content-card">
+        <div class="card-body p-4 p-md-5">
+          <p class="mini-label mb-2">Project overview</p>
+          <h3 class="mb-3">What problem are we solving?</h3>
+          <p class="text-muted">
+            People often know how they feel, but struggle to translate those symptoms into structured information. This project was built to bridge that gap. Instead of relying on raw text alone, the current version uses a guided symptom picker, model-backed predictions, and clear recommendation cards.
+          </p>
+
+          <h4 class="mt-4 mb-3">How the app works</h4>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="card soft-card">
+                <div class="card-body p-4">
+                  <strong>1. Symptom selection</strong>
+                  <p class="text-muted small mb-0">Users choose supported symptoms with autocomplete and chip-based selection.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card soft-card">
+                <div class="card-body p-4">
+                  <strong>2. Prediction pipeline</strong>
+                  <p class="text-muted small mb-0">A rebuilt training pipeline compares multiple models and exports a fresh inference bundle.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card soft-card">
+                <div class="card-body p-4">
+                  <strong>3. Top match output</strong>
+                  <p class="text-muted small mb-0">The app shows the most likely condition plus alternative matches with confidence values.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card soft-card">
+                <div class="card-body p-4">
+                  <strong>4. Actionable guidance</strong>
+                  <p class="text-muted small mb-0">Users receive precautions, diet support, medicines, activity tips, and care escalation cues.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="mt-4 mb-3">Why this version is stronger</h4>
+          <p class="text-muted mb-0">
+            The current implementation is more than a model demo. It now has a modular backend, reproducible training script, improved validation, structured result presentation, and UI decisions that reduce input errors and make the result easier to act on.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card soft-card">
+        <div class="card-body p-4">
+          <p class="mini-label mb-2">Stack highlights</p>
+          <div class="d-grid gap-3">
+            <div>
+              <strong>Flask backend</strong>
+              <p class="text-muted small mb-0">Handles routing, validation, prediction, and template rendering.</p>
+            </div>
+            <div>
+              <strong>scikit-learn models</strong>
+              <p class="text-muted small mb-0">Compared with a reproducible training script and saved as a joblib bundle.</p>
+            </div>
+            <div>
+              <strong>Dataset-driven guidance</strong>
+              <p class="text-muted small mb-0">Precautions, medications, workouts, and diet advice come from linked CSV resources.</p>
+            </div>
+            <div>
+              <strong>UX-focused frontend</strong>
+              <p class="text-muted small mb-0">Autocomplete chips, inline results, urgency color coding, and matched symptom highlighting.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

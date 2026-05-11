@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediPredict</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --brand-blue: #2563eb;
+        --brand-teal: #14b8a6;
+        --page-bg: #f8fafc;
+        --text-dark: #1e293b;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 24%),
+          radial-gradient(circle at bottom right, rgba(20, 184, 166, 0.18), transparent 28%),
+          var(--page-bg);
+        color: var(--text-dark);
+      }
+
+      .hero-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
+        gap: 24px;
+        align-items: stretch;
+        margin-bottom: 28px;
+      }
+
+      .hero-panel {
+        border: 0;
+        border-radius: 28px;
+        padding: 32px;
+        background:
+          linear-gradient(135deg, rgba(37, 99, 235, 0.98), rgba(20, 184, 166, 0.92)),
+          #2563eb;
+        color: #fff;
+        box-shadow: 0 28px 55px rgba(37, 99, 235, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-panel::after {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        top: -70px;
+        right: -60px;
+      }
+
+      .floating-illustration {
+        position: absolute;
+        right: 30px;
+        bottom: 24px;
+        width: 92px;
+        height: 92px;
+        border-radius: 28px;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(8px);
+        font-size: 2.4rem;
+        animation: floatY 5s ease-in-out infinite;
+      }
+
+      .hero-title {
+        color: #fff;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1.08;
+        max-width: 10ch;
+      }
+
+      .hero-copy {
+        max-width: 54ch;
+        color: rgba(255, 255, 255, 0.86);
+      }
+
+      .hero-points {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .hero-point {
+        border-radius: 18px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px);
+      }
+
+      .hero-point strong {
+        display: block;
+        font-size: 1.1rem;
+      }
+
+      .hero-side {
+        display: grid;
+        gap: 18px;
+      }
+
+      .hero-side-card {
+        border: 0;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+      }
+
+      .hero-side-card .card-body {
+        padding: 24px;
+      }
+
+      .mini-label {
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .journey-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .journey-step {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+
+      .journey-step-badge {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(20, 184, 166, 0.18));
+        color: var(--brand-blue);
+      }
+
+      .main-card {
+        border: 0;
+        border-radius: 28px;
+        box-shadow: 0 24px 50px rgba(15, 23, 42, 0.1);
+      }
+
+      .symptom-picker {
+        border: 1px solid #cbd5e1;
+        border-radius: 18px;
+        background: #fff;
+        padding: 12px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .symptom-picker:focus-within {
+        border-color: rgba(37, 99, 235, 0.5);
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+      }
+
+      .chip-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        min-height: 44px;
+      }
+
+      .symptom-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 0;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(20, 184, 166, 0.16));
+        color: var(--text-dark);
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        animation: chipPop 0.25s ease;
+      }
+
+      .chip-remove {
+        border: 0;
+        background: transparent;
+        color: #334155;
+        font-size: 16px;
+        line-height: 1;
+        padding: 0;
+      }
+
+      .chip-remove:hover {
+        color: #ef4444;
+      }
+
+      .picker-input {
+        border: 0;
+        box-shadow: none;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .picker-input:focus {
+        box-shadow: none;
+      }
+
+      .quick-picks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .quick-pick-btn {
+        border-radius: 999px;
+        border: 1px solid rgba(37, 99, 235, 0.18);
+        background: rgba(37, 99, 235, 0.06);
+        color: var(--brand-blue);
+        font-size: 14px;
+        font-weight: 600;
+        padding: 8px 14px;
+      }
+
+      .quick-pick-btn:hover {
+        background: rgba(37, 99, 235, 0.12);
+      }
+
+      .helper-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .helper-card {
+        border-radius: 20px;
+        background: linear-gradient(180deg, #ffffff, #f8fbff);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        padding: 18px;
+      }
+
+      .helper-card h6 {
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .category-browser {
+        margin-top: 24px;
+        border-radius: 24px;
+        border: 1px solid rgba(148, 163, 184, 0.16);
+        background: linear-gradient(180deg, #ffffff, #f8fbff);
+        padding: 20px;
+      }
+
+      .category-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .category-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(37, 99, 235, 0.14);
+        border-radius: 999px;
+        background: #fff;
+        color: #334155;
+        padding: 10px 14px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .category-tab:hover,
+      .category-tab.is-active {
+        color: #fff;
+        background: linear-gradient(135deg, #2563eb, #14b8a6);
+        border-color: transparent;
+        box-shadow: 0 12px 24px rgba(37, 99, 235, 0.16);
+      }
+
+      .category-panel {
+        border-radius: 20px;
+        background: #fff;
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        padding: 18px;
+      }
+
+      .category-symptoms {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .category-symptom-btn {
+        border: 1px solid rgba(37, 99, 235, 0.14);
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.06);
+        color: #1e3a8a;
+        padding: 9px 13px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.18s ease;
+      }
+
+      .category-symptom-btn:hover {
+        background: rgba(37, 99, 235, 0.12);
+        transform: translateY(-1px);
+      }
+
+      .results-shell {
+        display: grid;
+        gap: 20px;
+      }
+
+      .summary-card,
+      .insight-card {
+        border: 0;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+        animation: fadeUp 0.45s ease both;
+      }
+
+      .prediction-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, #eff6ff, #ecfeff);
+        border: 1px solid rgba(37, 99, 235, 0.14);
+        border-radius: 999px;
+        padding: 10px 16px;
+        color: var(--brand-blue);
+        font-weight: 600;
+      }
+
+      .match-chip-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .match-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 9px 14px;
+        font-size: 14px;
+        font-weight: 600;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(20, 184, 166, 0.16));
+        color: #0f172a;
+        border: 1px solid rgba(37, 99, 235, 0.16);
+      }
+
+      .top-match-card {
+        border: 1px solid rgba(148, 163, 184, 0.24);
+        border-radius: 20px;
+        background: #fff;
+        padding: 18px;
+        height: 100%;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .top-match-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+      }
+
+      .confidence-track {
+        height: 10px;
+        border-radius: 999px;
+        background: #e2e8f0;
+        overflow: hidden;
+      }
+
+      .confidence-bar {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #2563eb, #14b8a6);
+      }
+
+      .consult-card {
+        border: 0;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(251, 146, 60, 0.12);
+      }
+
+      .safety-card {
+        border: 0;
+        border-radius: 24px;
+        background: linear-gradient(135deg, #fffaf0, #fff7ed);
+        box-shadow: 0 20px 40px rgba(251, 146, 60, 0.08);
+      }
+
+      .safety-list {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+
+      .safety-list li + li {
+        margin-top: 10px;
+      }
+
+      .consult-level {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        background: rgba(239, 68, 68, 0.12);
+        color: #b91c1c;
+      }
+
+      .tone-urgent {
+        background: linear-gradient(135deg, #fff1f2, #fee2e2);
+        box-shadow: 0 20px 40px rgba(239, 68, 68, 0.12);
+      }
+
+      .tone-urgent .consult-level {
+        background: rgba(239, 68, 68, 0.14);
+        color: #b91c1c;
+      }
+
+      .tone-same-day {
+        background: linear-gradient(135deg, #fff7ed, #ffedd5);
+        box-shadow: 0 20px 40px rgba(249, 115, 22, 0.12);
+      }
+
+      .tone-same-day .consult-level {
+        background: rgba(249, 115, 22, 0.14);
+        color: #c2410c;
+      }
+
+      .tone-soon {
+        background: linear-gradient(135deg, #fefce8, #fef3c7);
+        box-shadow: 0 20px 40px rgba(234, 179, 8, 0.12);
+      }
+
+      .tone-soon .consult-level {
+        background: rgba(234, 179, 8, 0.16);
+        color: #a16207;
+      }
+
+      .tone-monitor {
+        background: linear-gradient(135deg, #ecfeff, #e0f2fe);
+        box-shadow: 0 20px 40px rgba(14, 165, 233, 0.1);
+      }
+
+      .tone-monitor .consult-level {
+        background: rgba(14, 165, 233, 0.16);
+        color: #0369a1;
+      }
+
+      .insight-card {
+        background: #fff;
+      }
+
+      .insight-card .card-title {
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .support-note {
+        margin-top: 14px;
+        border-radius: 16px;
+        padding: 12px 14px;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        background: rgba(255, 255, 255, 0.58);
+        border: 1px solid rgba(148, 163, 184, 0.16);
+      }
+
+      .section-kicker {
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .insight-list {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+
+      .insight-list li + li {
+        margin-top: 8px;
+      }
+
+      .description-card {
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(96, 165, 250, 0.12));
+      }
+
+      .precaution-card {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(252, 211, 77, 0.16));
+      }
+
+      .medication-card {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(196, 181, 253, 0.16));
+      }
+
+      .diet-card {
+        background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(94, 234, 212, 0.16));
+      }
+
+      .workout-card {
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(134, 239, 172, 0.16));
+      }
+
+      .icon-badge {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        display: inline-grid;
+        place-items: center;
+        margin-bottom: 14px;
+        font-size: 1.15rem;
+      }
+
+      .icon-blue { background: rgba(37, 99, 235, 0.12); color: #1d4ed8; }
+      .icon-amber { background: rgba(245, 158, 11, 0.16); color: #b45309; }
+      .icon-violet { background: rgba(139, 92, 246, 0.14); color: #7c3aed; }
+      .icon-teal { background: rgba(20, 184, 166, 0.14); color: #0f766e; }
+      .icon-green { background: rgba(34, 197, 94, 0.14); color: #15803d; }
+
+      @keyframes chipPop {
+        0% { transform: scale(0.92); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+
+      @keyframes fadeUp {
+        0% { transform: translateY(16px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+      }
+
+      @keyframes floatY {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+
+      @media (max-width: 767.98px) {
+        .hero-shell,
+        .helper-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-panel {
+          padding: 24px;
+        }
+
+        .hero-points {
+          grid-template-columns: 1fr;
+        }
+
+        .main-card,
+        .summary-card,
+        .consult-card,
+        .insight-card {
+          border-radius: 20px;
+        }
+
+        .container {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .top-match-card {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark shadow" style="background: linear-gradient(90deg, #2563eb, #14b8a6);">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold fs-3" href="/">MediPredict</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/developer">Developer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/blog">Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 py-md-5">
+      <section class="hero-shell">
+        <div class="hero-panel">
+          <p class="mini-label text-white-50 mb-3">Symptom-based health guidance</p>
+          <h1 class="fw-bold mb-3 hero-title">Turn scattered symptoms into a clearer next step.</h1>
+          <p class="hero-copy mb-0">
+            Pick symptoms from the guided list and get an easy-to-read condition summary, practical care suggestions, and signals for when medical attention matters.
+          </p>
+          <div class="floating-illustration" aria-hidden="true">
+            <i class="bi bi-heart-pulse-fill"></i>
+          </div>
+          <div class="hero-points">
+            <div class="hero-point">
+              <strong>132</strong>
+              <span>supported symptoms</span>
+            </div>
+            <div class="hero-point">
+              <strong>41</strong>
+              <span>conditions modeled</span>
+            </div>
+            <div class="hero-point">
+              <strong>Top 3</strong>
+              <span>prediction matches shown</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="card hero-side-card">
+            <div class="card-body">
+              <p class="mini-label mb-2">How it works</p>
+              <div class="journey-list">
+                <div class="journey-step">
+                  <div class="journey-step-badge">1</div>
+                  <div>
+                    <strong>Choose symptoms</strong>
+                    <p class="text-muted mb-0 small">Use autocomplete or quick picks instead of typing unsupported terms.</p>
+                  </div>
+                </div>
+                <div class="journey-step">
+                  <div class="journey-step-badge">2</div>
+                  <div>
+                    <strong>Review top matches</strong>
+                    <p class="text-muted mb-0 small">See the most likely condition plus alternative matches with confidence scores.</p>
+                  </div>
+                </div>
+                <div class="journey-step">
+                  <div class="journey-step-badge">3</div>
+                  <div>
+                    <strong>Act on guidance</strong>
+                    <p class="text-muted mb-0 small">Read precautions, diet, activity tips, and care escalation advice.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card hero-side-card">
+            <div class="card-body">
+              <p class="mini-label mb-2">Important</p>
+              <p class="mb-0 text-muted">
+                This tool is educational support, not a diagnosis. If symptoms are severe, sudden, or worsening, contact a qualified doctor or emergency service.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="alert alert-warning border-0 shadow-sm mb-4" role="alert">
+        <strong>Important:</strong> This tool is for informational and educational use only. It is not a medical diagnosis and should not replace advice from a qualified doctor. Seek urgent medical care for severe pain, breathing difficulty, chest pain, fainting, or other emergency symptoms.
+      </div>
+
+      <div class="card shadow-lg p-4 p-md-5 main-card">
+        <div class="row align-items-end g-4 mb-2">
+          <div class="col-lg-8">
+            <p class="section-kicker mb-2">Symptom picker</p>
+            <h3 class="mb-2 fw-bold text-primary">Build your symptom list with guided search</h3>
+            <p class="text-muted mb-0">
+              Add each symptom as a chip so the prediction uses only recognized terms from the model.
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <div class="helper-card">
+              <h6>Best results</h6>
+              <p class="text-muted mb-0 small">Choose 2 to 6 symptoms that are clearly present right now for a more useful result.</p>
+            </div>
+          </div>
+        </div>
+
+        <form action="/predict" method="post">
+          <div class="mb-4">
+            <label for="symptomSearch" class="form-label fw-semibold">Symptoms</label>
+            <div class="symptom-picker shadow-sm">
+              <div id="selectedSymptoms" class="chip-list mb-2"></div>
+              <input
+                type="text"
+                class="form-control form-control-lg picker-input"
+                id="symptomSearch"
+                list="symptomOptions"
+                placeholder="Type a symptom like skin rash, fatigue, or high fever"
+                autocomplete="off"
+              >
+              <input type="hidden" id="symptoms" name="symptoms" value="{{ entered_symptoms or '' }}" required>
+            </div>
+            <datalist id="symptomOptions">
+              {% for symptom in symptom_options %}
+                <option value="{{ symptom.label }}"></option>
+              {% endfor %}
+            </datalist>
+            <div class="form-text mt-2">
+              Start typing to search the symptom list. Press <kbd>Enter</kbd> or click a quick pick to add a symptom.
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <p class="form-label fw-semibold mb-2">Quick picks</p>
+            <div class="quick-picks">
+              {% for symptom in symptom_options[:8] %}
+                <button
+                  type="button"
+                  class="quick-pick-btn"
+                  data-quick-symptom="{{ symptom.label }}"
+                >
+                  {{ symptom.label }}
+                </button>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="category-browser">
+            <div class="d-flex flex-column flex-md-row justify-content-between gap-3 align-items-md-center">
+              <div>
+                <p class="section-kicker mb-2">Browse by category</p>
+                <h5 class="mb-1">Pick symptoms from body-system groups</h5>
+                <p class="text-muted mb-0">Useful when you are not sure what exact term to search for.</p>
+              </div>
+            </div>
+            <div id="categoryTabs" class="category-tabs mt-4"></div>
+            <div id="categoryPanel" class="category-panel"></div>
+          </div>
+
+          <div class="helper-grid">
+            <div class="helper-card">
+              <h6>Use specific terms</h6>
+              <p class="text-muted mb-0 small">Prefer exact items like <code>high fever</code> or <code>skin rash</code> instead of vague words.</p>
+            </div>
+            <div class="helper-card">
+              <h6>Avoid overloading</h6>
+              <p class="text-muted mb-0 small">Only add symptoms you currently notice. Extra unrelated chips can weaken the prediction.</p>
+            </div>
+            <div class="helper-card">
+              <h6>Review what matched</h6>
+              <p class="text-muted mb-0 small">After submitting, compare the recognized symptoms and top matches before relying on the guidance.</p>
+            </div>
+          </div>
+
+          {% if message %}
+            <div class="alert alert-danger" role="alert">
+              {{ message }}
+            </div>
+          {% endif %}
+
+          {% if recognized_symptoms %}
+            <div class="alert alert-info" role="alert">
+              <strong>Recognized symptoms:</strong> {{ recognized_symptoms | join(', ') }}
+            </div>
+          {% endif %}
+
+          <button type="submit" class="btn btn-primary btn-lg w-100 py-3 fw-bold">
+            Analyze Symptoms
+          </button>
+        </form>
+      </div>
+
+      {% if predicted_disease %}
+        <section class="mt-5">
+          <h4 class="text-center fw-bold text-primary my-3">Prediction Results</h4>
+          <div class="results-shell">
+            <div class="card summary-card">
+              <div class="card-body p-4 p-md-5">
+                <p class="section-kicker mb-2">Prediction summary</p>
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+                  <div>
+                    <p class="text-muted mb-2">Most likely condition</p>
+                    <h3 class="mb-0">{{ predicted_disease }}</h3>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <span class="prediction-badge">Recognized: {{ recognized_symptoms | length }} symptom{{ '' if recognized_symptoms | length == 1 else 's' }}</span>
+                    {% if model_name %}
+                      <span class="badge text-bg-light border align-self-start align-self-md-center">Model: {{ model_name }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+
+                {% if recognized_symptoms %}
+                  <div class="mb-4">
+                    <p class="text-muted mb-2">Matched symptoms</p>
+                    <div class="match-chip-group">
+                      {% for symptom in recognized_symptoms %}
+                        <span class="match-chip"><i class="bi bi-check2-circle"></i>{{ symptom }}</span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if top_predictions %}
+                  <div class="row g-3">
+                    {% for prediction in top_predictions %}
+                      <div class="col-lg-4">
+                        <div class="top-match-card">
+                          <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                            <div>
+                              <p class="text-muted mb-1 small">Match {{ loop.index }}</p>
+                              <h6 class="mb-0">{{ prediction.disease }}</h6>
+                            </div>
+                            <strong>{{ prediction.confidence }}%</strong>
+                          </div>
+                          <div class="confidence-track">
+                            <div class="confidence-bar" style="width: {{ prediction.confidence }}%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="card consult-card tone-{{ consultation_guidance.tone }}">
+              <div class="card-body p-4 p-md-5">
+                <p class="section-kicker mb-2">Care escalation</p>
+                <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-3">
+                  <div>
+                    <p class="text-muted mb-2">When to consult a doctor</p>
+                    <h4 class="mb-0">Clinical guidance for next steps</h4>
+                  </div>
+                  <span class="consult-level">{{ consultation_guidance.level }}</span>
+                </div>
+                <p class="mb-3">{{ consultation_guidance.message }}</p>
+                <div class="row g-3">
+                  {% for sign in consultation_guidance.urgent_signs %}
+                    <div class="col-sm-6 col-lg-4">
+                      <div class="bg-white rounded-4 p-3 h-100 border border-danger-subtle">
+                        <strong class="d-block">{{ sign }}</strong>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+
+            <div class="card safety-card">
+              <div class="card-body p-4 p-md-5">
+                <p class="section-kicker mb-2">Recommendation safety</p>
+                <h4 class="mb-3">Use these suggestions as support, not treatment instructions.</h4>
+                <p class="text-muted mb-3">{{ recommendation_safety.summary }}</p>
+                <ul class="safety-list">
+                  <li>{{ recommendation_safety.medication }}</li>
+                  <li>{{ recommendation_safety.diet }}</li>
+                  <li>{{ recommendation_safety.activity }}</li>
+                  <li>{{ recommendation_safety.follow_up }}</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-lg-6">
+                <div class="card insight-card description-card h-100">
+                  <div class="card-body p-4">
+                    <div class="icon-badge icon-blue"><i class="bi bi-file-earmark-medical"></i></div>
+                    <h5 class="card-title mb-3">Condition overview</h5>
+                    <p class="mb-0">{{ dis_des }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card insight-card precaution-card h-100">
+                  <div class="card-body p-4">
+                    <div class="icon-badge icon-amber"><i class="bi bi-shield-check"></i></div>
+                    <h5 class="card-title mb-3">Precautions</h5>
+                    <ul class="insight-list">
+                      {% for item in my_precautions %}
+                        <li>{{ item }}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card insight-card medication-card h-100">
+                  <div class="card-body p-4">
+                    <div class="icon-badge icon-violet"><i class="bi bi-capsule-pill"></i></div>
+                    <h5 class="card-title mb-3">Medicines sometimes used</h5>
+                    <ul class="insight-list">
+                      {% for item in medications %}
+                        <li>{{ item }}</li>
+                      {% endfor %}
+                    </ul>
+                    <div class="support-note">
+                      <strong>Safety note:</strong> {{ recommendation_safety.medication }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card insight-card diet-card h-100">
+                  <div class="card-body p-4">
+                    <div class="icon-badge icon-teal"><i class="bi bi-cup-hot"></i></div>
+                    <h5 class="card-title mb-3">Diet support</h5>
+                    <ul class="insight-list">
+                      {% for item in my_diet %}
+                        <li>{{ item }}</li>
+                      {% endfor %}
+                    </ul>
+                    <div class="support-note">
+                      <strong>Safety note:</strong> {{ recommendation_safety.diet }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card insight-card workout-card h-100">
+                  <div class="card-body p-4">
+                    <div class="icon-badge icon-green"><i class="bi bi-person-walking"></i></div>
+                    <h5 class="card-title mb-3">Activity guidance</h5>
+                    <ul class="insight-list">
+                      {% for item in workout %}
+                        <li>{{ item }}</li>
+                      {% endfor %}
+                    </ul>
+                    <div class="support-note">
+                      <strong>Safety note:</strong> {{ recommendation_safety.activity }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const symptomOptions = {{ symptom_options | tojson }};
+      const symptomCategories = {{ symptom_categories | tojson }};
+      const selectedSymptomsContainer = document.getElementById("selectedSymptoms");
+      const symptomSearchInput = document.getElementById("symptomSearch");
+      const hiddenSymptomsInput = document.getElementById("symptoms");
+      const quickPickButtons = document.querySelectorAll("[data-quick-symptom]");
+      const categoryTabs = document.getElementById("categoryTabs");
+      const categoryPanel = document.getElementById("categoryPanel");
+
+      const labelToValue = Object.fromEntries(symptomOptions.map((option) => [option.label.toLowerCase(), option.value]));
+      const valueToLabel = Object.fromEntries(symptomOptions.map((option) => [option.value, option.label]));
+
+      let selectedSymptoms = [];
+      let activeCategoryKey = symptomCategories.length ? symptomCategories[0].key : null;
+
+      function normalizeInput(text) {
+        return text.trim().toLowerCase().replace(/[-/]/g, " ").replace(/\s+/g, " ");
+      }
+
+      function syncHiddenInput() {
+        hiddenSymptomsInput.value = selectedSymptoms.map((value) => valueToLabel[value] || value).join(", ");
+      }
+
+      function renderChips() {
+        selectedSymptomsContainer.innerHTML = "";
+
+        selectedSymptoms.forEach((symptomValue) => {
+          const chip = document.createElement("span");
+          chip.className = "symptom-chip";
+          chip.innerHTML = `
+            <span>${valueToLabel[symptomValue] || symptomValue}</span>
+            <button type="button" class="chip-remove" aria-label="Remove symptom">&times;</button>
+          `;
+
+          chip.querySelector(".chip-remove").addEventListener("click", () => {
+            selectedSymptoms = selectedSymptoms.filter((item) => item !== symptomValue);
+            renderChips();
+            syncHiddenInput();
+          });
+
+          selectedSymptomsContainer.appendChild(chip);
+        });
+      }
+
+      function addSymptom(rawValue) {
+        const normalizedLabel = normalizeInput(rawValue);
+        const mappedValue = labelToValue[normalizedLabel];
+        if (!mappedValue || selectedSymptoms.includes(mappedValue)) {
+          return false;
+        }
+
+        selectedSymptoms.push(mappedValue);
+        renderChips();
+        syncHiddenInput();
+        symptomSearchInput.value = "";
+        renderCategoryPanel();
+        return true;
+      }
+
+      function renderCategoryTabs() {
+        if (!categoryTabs) {
+          return;
+        }
+
+        categoryTabs.innerHTML = "";
+        symptomCategories.forEach((category) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `category-tab ${category.key === activeCategoryKey ? "is-active" : ""}`;
+          button.innerHTML = `<i class="bi ${category.icon}"></i><span>${category.label}</span><span class="small opacity-75">(${category.count})</span>`;
+          button.addEventListener("click", () => {
+            activeCategoryKey = category.key;
+            renderCategoryTabs();
+            renderCategoryPanel();
+          });
+          categoryTabs.appendChild(button);
+        });
+      }
+
+      function renderCategoryPanel() {
+        if (!categoryPanel) {
+          return;
+        }
+
+        const activeCategory = symptomCategories.find((category) => category.key === activeCategoryKey);
+        if (!activeCategory) {
+          categoryPanel.innerHTML = "";
+          return;
+        }
+
+        const symptomsMarkup = activeCategory.symptoms.map((symptom) => {
+          const isSelected = selectedSymptoms.includes(symptom.value);
+          return `
+            <button
+              type="button"
+              class="category-symptom-btn"
+              data-category-symptom="${symptom.label}"
+              ${isSelected ? "disabled" : ""}
+            >
+              ${isSelected ? "Added: " : ""}${symptom.label}
+            </button>
+          `;
+        }).join("");
+
+        categoryPanel.innerHTML = `
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-3 align-items-md-start">
+            <div>
+              <h6 class="mb-1"><i class="bi ${activeCategory.icon} me-2"></i>${activeCategory.label}</h6>
+              <p class="text-muted mb-0">${activeCategory.description}</p>
+            </div>
+            <span class="badge text-bg-light border">${activeCategory.count} symptoms</span>
+          </div>
+          <div class="category-symptoms">${symptomsMarkup}</div>
+        `;
+
+        categoryPanel.querySelectorAll("[data-category-symptom]").forEach((button) => {
+          button.addEventListener("click", () => {
+            addSymptom(button.dataset.categorySymptom);
+            renderCategoryTabs();
+          });
+        });
+      }
+
+      function hydrateFromExistingInput() {
+        const existingValue = hiddenSymptomsInput.value.trim();
+        if (!existingValue) {
+          return;
+        }
+
+        existingValue.split(",").forEach((item) => {
+          addSymptom(item);
+        });
+      }
+
+      symptomSearchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === ",") {
+          event.preventDefault();
+          addSymptom(symptomSearchInput.value);
+        }
+      });
+
+      symptomSearchInput.addEventListener("blur", () => {
+        if (symptomSearchInput.value.trim()) {
+          addSymptom(symptomSearchInput.value);
+        }
+      });
+
+      quickPickButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          addSymptom(button.dataset.quickSymptom);
+        });
+      });
+
+      hydrateFromExistingInput();
+      syncHiddenInput();
+      renderCategoryTabs();
+      renderCategoryPanel();
+    </script>
+  </body>
+</html>
