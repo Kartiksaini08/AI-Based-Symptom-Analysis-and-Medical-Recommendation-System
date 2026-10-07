@@ -96,8 +96,6 @@ The saved metrics now include:
 - Home page with symptom input and validation feedback
 - Prediction result view with recommendation modals
 
-Add screenshots to this repository later if you want a stronger portfolio presentation.
-
 ## Current Limitations
 
 - The training dataset is highly repetitive. It contains `4,920` rows but only `304` unique symptom profiles, so naive train/test splits can look unrealistically strong.
@@ -108,16 +106,7 @@ Add screenshots to this repository later if you want a stronger portfolio presen
 - Free-text symptom input still depends on the current symptom vocabulary.
 - The recommendation content is dataset-driven and not medically verified for clinical use.
 
-## Evaluation Notes
 
-- The project now reports a stricter deduplicated-profile evaluation in addition to the standard holdout split.
-- Model selection should be guided more by the deduplicated split and cross-validation metrics than by the naive holdout alone.
-- Because the dataset is synthetic or highly structured in feel, the metrics are best interpreted as internal benchmark numbers, not proof of clinical reliability.
-- For a stronger ML story, the next improvement would be evaluation on a less repetitive dataset or on symptom profiles collected from a different source.
-
-## Resume Title
-
-**Symptom-Based Disease Prediction and Recommendation System**
 
 ## Disclaimer
 
